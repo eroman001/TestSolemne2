@@ -71,6 +71,21 @@ class Producto{
 		return $valaux;
 	}
 		
-        
+        function Agregar($id){
+	
+		$db=dbconnect();
+		
+			/*Definici�n del query que permitira eliminar un registro*/
+			$sqladd="Insert from productos where idproducto=:id";
+	
+			/*Preparaci�n SQL*/
+			$queryadd=$db->prepare($sqladd);
+			
+			$queryadd->bindParam(':id',$id);
+			
+			$valaux=$queryadd->execute();
+	
+		return $valaux;
+	}
 }
 ?>
