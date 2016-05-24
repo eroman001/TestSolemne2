@@ -82,12 +82,15 @@ class Producto{
 		$db=dbconnect();
 		
 			/*Definici�n del query que permitira eliminar un registro*/
-			$sqladd="INSERT INTO PRODUCTOS(NOMBRE,TOTALUSD,ANO)VALUES (:snombre,:ntotalusd,:nano)";
+			$sqladd="INSERT INTO PRODUCTOS(NOMBRE,TOTALUSD,ANO)VALUES (:nom,:ntotusd,:anio)";
                         
 			/*Preparaci�n SQL*/
 			$queryadd=$db->prepare($sqladd);
 			
-			$queryadd->bindParam(':id',$id);
+                        /*Asignación de parametros utilizando bindparam*/
+			$queryadd->bindParam(':nom',snombre);
+                        $queryadd->bindParam(':ntotusd',ntotalusd);
+                        $queryadd->bindParam(':anio',nano);
 			
 			$valaux=$queryadd->execute();
                         
@@ -96,7 +99,6 @@ class Producto{
                         $oTransac->Ingreso();
                         
 		return $valaux;
-	}
-					
+	}	
 }
 ?>
