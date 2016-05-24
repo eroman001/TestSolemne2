@@ -5,12 +5,14 @@ class Producto{
 	private $snombre;
 	private $ntotalusd;
 	private $nano;
+        private $nidusuario;
 	private $querysel;
-	function __construct($nid=NULL,$snom=NULL,$ntot=NULL,$nano=NULL){
+	function __construct($nid=NULL,$snom=NULL,$ntot=NULL,$nano=NULL,$nidusuario=NULL){
 		$this->nidproducto=$nid;
 		$this->snombre=$snom;
 		$this->ntotalusd=$ntot;
 		$this->nano=$nano;
+                $this->nidusuario=$nidusuario;
 		
 	}
 	
@@ -67,25 +69,13 @@ class Producto{
 			$querydel->bindParam(':id',$id);
 			
 			$valaux=$querydel->execute();
-	
+                        
+                        $oTransac=new Transaccion($this->nidusuario,"Eliminado desde la clase","Producto","D");
+                        
+                        $oTransac->Ingreso();
+                        
 		return $valaux;
 	}
-		
-        function Agregar($id){
-	
-		$db=dbconnect();
-		
-			/*Definici�n del query que permitira eliminar un registro*/
-			$sqladd="Insert from productos where idproducto=:id";
-	
-			/*Preparaci�n SQL*/
-			$queryadd=$db->prepare($sqladd);
-			
-			$queryadd->bindParam(':id',$id);
-			
-			$valaux=$queryadd->execute();
-	
-		return $valaux;
-	}
+					
 }
 ?>
