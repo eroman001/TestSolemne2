@@ -88,9 +88,9 @@ class Producto{
 			$queryadd=$db->prepare($sqladd);
 			
                         /*Asignación de parametros utilizando bindparam*/
-			$queryadd->bindParam(':nom',snombre);
-                        $queryadd->bindParam(':ntotusd',ntotalusd);
-                        $queryadd->bindParam(':anio',nano);
+			$queryadd->bindParam(':nom', $this->snombre);
+                        $queryadd->bindParam(':ntotusd', $this->ntotalusd);
+                        $queryadd->bindParam(':anio',  $this->nano);
 			
 			$valaux=$queryadd->execute();
                         
