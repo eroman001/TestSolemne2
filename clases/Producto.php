@@ -76,6 +76,27 @@ class Producto{
                         
 		return $valaux;
 	}
+        
+        function Agregar($id){
+	
+		$db=dbconnect();
+		
+			/*Definici�n del query que permitira eliminar un registro*/
+			$sqladd="INSERT INTO PRODUCTOS(NOMBRE,TOTALUSD,ANO)VALUES (:snombre,:ntotalusd,:nano)";
+                        
+			/*Preparaci�n SQL*/
+			$queryadd=$db->prepare($sqladd);
+			
+			$queryadd->bindParam(':id',$id);
+			
+			$valaux=$queryadd->execute();
+                        
+                        $oTransac=new Transaccion($this->nidusuario,"Agrega desde la clase","Producto","D");
+                        
+                        $oTransac->Ingreso();
+                        
+		return $valaux;
+	}
 					
 }
 ?>
